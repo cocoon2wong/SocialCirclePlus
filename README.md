@@ -1,5 +1,211 @@
 # SocialCirclePlus
 
+This is the official codes for "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction".
+
+SocialCircle+ is an extensive version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle).
+
+For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus).
+
+## Get Started
+
+You can clone [this repository](https://github.com/cocoon2wong/SocialCirclePlus) by the following command:
+
+```bash
+git clone https://github.com/cocoon2wong/SocialCirclePlus.git
+```
+
+Then, run the following command to initialize all submodules:
+
+```bash
+git submodule update --init --recursive
+```
+
+## Requirements
+
+The codes are developed with Python 3.10.
+Additional packages used are included in the `requirements.txt` file.
+
+{: .box-warning}
+**Warning:** We recommend installing all required Python packages in a virtual environment (like the `conda` environment).
+Otherwise, there *COULD* be other problems due to the package version conflicts.
+
+Run the following command to install the required packages in your Python environment:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Dataset Prepare and Process
+
+### ETH-UCY, SDD, NBA, nuScenes
+
+{: .box-warning}
+**Warning:** If you want to validate `SocialCirclePlus` models on these datasets, make sure you are getting this repository via `git clone` and that all `gitsubmodules` have been properly initialized via `git submodule update --init --recursive`.
+
+You can run the following commands to prepare dataset files that have been validated in our paper:
+
+1. Run Python the script inner the `dataset_original` folder:
+
+    ```bash
+    cd dataset_original
+    ```
+
+    - For `ETH-UCY` and `SDD`, run
+
+      ```bash
+      python main_ethucysdd.py
+      ```
+
+    - For `NBA` or `nuScenes`, you can download their original dataset files, put them into the given path listed within `dataset_original/main_nba.py` or `dataset_original/main_nuscenes.py`, then run
+
+      ```bash
+      python main_nba.py
+      python main_nuscenes.py
+      ```
+      
+      (You can also download the processed dataset files manually from [here](https://github.com/cocoon2wong/Project-Luna/releases), and put them into `dataset_processed` and `dataset_configs` folders.)
+
+2. Back to the repo folder and create soft links:
+
+    ```bash
+    cd ..
+    ln -s dataset_original/dataset_processed ./
+    ln -s dataset_original/dataset_configs ./
+    ```
+
+Click the following button to learn more about how to process these dataset files.
+
+<div style="text-align: center;">
+    <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
+</div>
+
+### Prepare Your New Datasets
+
+Before training `SocialCirclePlus` models on your own dataset, you should add your dataset information.
+See [this document](https://cocoon2wong.github.io/Project-Luna/) for details.
+
+## Pre-Trained Model Weights and Evaluation
+
+We have provided our pre-trained model weights to help you quickly evaluate the `SocialCirclePlus` models' performance.
+
+Click the following buttons to download our model weights.
+We recommend that you download the weights and place them in the `weights/SocialCirclePlus` folder.
+
+<div style="text-align: center;">
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus">⬇️ Download Weights</a>
+</div>
+
+You can start evaluating models by
+
+```bash
+python main.py --sc SOME_MODEL_WEIGHTS
+```
+
+Here, `SOME_MODEL_WEIGHTS` is the path of the weights folder, for example, `weights/SocialCirclePlus/evspczara1_adaptive`.
+
+## Training
+
+You can start training a `SocialCirclePlus` model via the following command:
+
+```bash
+python main.py --model MODEL_IDENTIFIER --split DATASET_SPLIT
+```
+
+Here, `MODEL_IDENTIFIER` is the identifier of the model.
+These identifiers are supported in current codes:
+
+- The basic transformer model for trajectory prediction:
+  - `trans` (named the `Transformer` in the paper);
+  - `transsc` (SocialCircle variation `Transformer-SC`);
+  - `transspc` (SocialCircle+ variation `Transformer-SCP`);
+- MSN ([🔗homepage](https://northocean.github.io/MSN/)):
+  - `msna` (original model);
+  - `msnsc` (SocialCircle variation);
+  - `msnspc` (SocialCircle+ variation).
+- V^2-Net ([🔗homepage](https://cocoon2wong.github.io/Vertical/)):
+  - `va` (original model);
+  - `vsc` (SocialCircle variation);
+  - `vspc` (SocialCircle+ variation)
+- E-V^2-Net ([🔗homepage](https://cocoon2wong.github.io/E-Vertical/)):
+  - `eva` (original model);
+  - `evsc` (SocialCircle variation);
+  - `evspc` (SocialCircle+ variation)
+
+`DATASET_SPLIT` is the identifier (i.e., the name of dataset's split files in `dataset_configs`, for example `eth` is the identifier of the split list in `dataset_configs/ETH-UCY/eth.plist`) of the dataset or splits used for training.
+It accepts:
+
+- ETH-UCY: {`eth`, `hotel`, `univ`, `zara1`, `zara2`};
+- SDD: `sdd`;
+- NBA: `nba50k`;
+- nuScenes: {`nuScenes_v1.0`, `nuScenes_ov_v1.0`};
+
+For example, you can start training the `E-V^2-Net-SCP` model by
+
+```bash
+python main.py --model evspc --split zara1
+```
+
+You can also specify other needed args, like the learning rate `--lr`, batch size `--batch_size`, etc.
+See detailed args in the `Args Used` Section.
+
+In addition, the simplest way to reproduce our results is to copy all training args we used in the provided weights.
+For example, you can start a training of `E-V^2-Net-SCP` on `zara1` by:
+
+```bash
+python main.py --restore_args weights/SocialCirclePlus/evspczara1_adapative
+```
+
+### Toy Example
+
+You can run the following script to learn how the proposed `SocialCirclePlus` works in an interactive way:
+
+```bash
+python scripts/socialcircle_toy_example.py
+```
+
+In the toy example, you can click `Switch Mode` to experience three interactive modes:
+
+- Interactive(SC)
+  - Directly click on the scene picture or type in coordinates to set positions of the manual neighbor to see the model's outputs like:
+
+<div style="text-align: center;">
+    <img style="width: 100%;" src="./img/toy_example_SC.png">
+</div>
+
+- Interactive(PC)
+  - Directly click on the scene picture or type in coordinates to set a pair of corners' positions to add a manual obstacle to see the model's outputs like:
+
+<div style="text-align: center;">
+    <img style="width: 100%;" src="./img/toy_example_PC.png">
+</div>
+
+- PLT
+  - Type in coordinates to set positions of the manual neighbor to see the model's outputs without the scene image in plt mode like:
+
+<div style="text-align: center;">
+    <img style="width: 100%;" src="./img/toy_example_PLT.png">
+</div>
+
+## Args Used
+
+Please specify your customized args when training or testing your model in the following way:
+
+```bash
+python main.py --ARG_KEY1 ARG_VALUE2 --ARG_KEY2 ARG_VALUE2 -SHORT_ARG_KEY3 ARG_VALUE3 ...
+```
+
+where `ARG_KEY` is the name of args, and `ARG_VALUE` is the corresponding value.
+All args and their usages are listed below.
+
+About the `argtype`:
+
+- Args with argtype=`static` can not be changed once after training.
+  When testing the model, the program will not parse these args to overwrite the saved values.
+- Args with argtype=`dynamic` can be changed anytime.
+  The program will try to first parse inputs from the terminal and then try to load from the saved JSON file.
+- Args with argtype=`temporary` will not be saved into JSON files.
+  The program will parse these args from the terminal at each time.
+
 <!-- DO NOT CHANGE THIS LINE -->
 
 ### Basic Args
@@ -224,3 +430,9 @@
   The number of points to simulate the trajectory of manual neighbor. It only accepts `2` or `3`. 
   The default value is `2`.
 <!-- DO NOT CHANGE THIS LINE -->
+
+## Contact us
+
+Conghao Wong ([@cocoon2wong](https://github.com/cocoon2wong)): conghaowong@icloud.com  
+Beihao Xia ([@NorthOcean](https://github.com/NorthOcean)): xbh_hust@hust.edu.cn  
+Ziqian Zou ([@LivepoolQ](https://github.com/LivepoolQ)): ziqianzoulive@icloud.com
