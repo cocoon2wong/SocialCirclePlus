@@ -163,26 +163,20 @@ python scripts/socialcircle_toy_example.py
 
 In the toy example window, you can click `Switch Mode` to switch into three modes:
 
-- Interactive(SC)
-  - Directly click on the scene picture or type in coordinates to set positions of the manual neighbor to see the model's outputs like:
+|SC Mode|PLT Mode|PC Mode|
+|--|--|--|
+|![Mode 1](./img/toy_example_SC.png)|![Mode 2](./img/toy_example_PLT.png)|![Mode 3](./img/toy_example_PC.png)|
 
-<div style="text-align: center;">
-    <img style="width: 100%;" src="./img/toy_example_SC.png">
-</div>
+- **Interactive(SC)**
+  You can directly click on the canvas or type in coordinates to set positions of the manual neighbor to see the model's outputs*;
 
-- Interactive(PC)
-  - Directly click on the scene picture or type in coordinates to set a pair of corners' positions to add a manual obstacle to see the model's outputs like:
+- **PLT Mode**
+  You can type in coordinates to set positions of the manual neighbor to see the model's outputs without the scene image in `matplotlib.pyplot` mode;
 
-<div style="text-align: center;">
-    <img style="width: 100%;" src="./img/toy_example_PC.png">
-</div>
+- **Interactive(PC)**
+  You can directly click on the canvas or type in coordinates to set a pair of corners' positions in pixels to add a manual obstacle box to see the model's outputs*.
 
-- PLT
-  - Type in coordinates to set positions of the manual neighbor to see the model's outputs without the scene image in plt mode like:
-
-<div style="text-align: center;">
-    <img style="width: 100%;" src="./img/toy_example_PLT.png">
-</div>
+\* These modes may need dataset videos. For copyright reasons, we do not provide them in our repo.
 
 ## Args Used
 
