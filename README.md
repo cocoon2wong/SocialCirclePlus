@@ -1,10 +1,9 @@
 # SocialCirclePlus
 
-This is the official codes for "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction".
+This is the official PyTorch codes for our paper "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction".
 
-SocialCircle+ is an extensive version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle).
-
-For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus).
+SocialCircle+ is an extended journal-version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle), and this paper will be made public soon.
+For our pre-trained model weights, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus).
 
 ## Get Started
 
@@ -62,8 +61,6 @@ You can run the following commands to prepare dataset files that have been valid
       python main_nba.py
       python main_nuscenes.py
       ```
-      
-      (You can also download the processed dataset files manually from [here](https://github.com/cocoon2wong/Project-Luna/releases), and put them into `dataset_processed` and `dataset_configs` folders.)
 
 2. Back to the repo folder and create soft links:
 
@@ -73,7 +70,9 @@ You can run the following commands to prepare dataset files that have been valid
     ln -s dataset_original/dataset_configs ./
     ```
 
-Click the following button to learn more about how to process these dataset files.
+ (**NOTE**: You can also download the processed dataset files manually from [here](https://github.com/cocoon2wong/Project-Luna/releases), and put them into `dataset_processed` and `dataset_configs` folders.)
+
+Click the following button to learn how we process these dataset files and the detailed dataset settings.
 
 <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
@@ -117,45 +116,44 @@ These identifiers are supported in current codes:
 - The basic transformer model for trajectory prediction:
   - `trans` (named the `Transformer` in the paper);
   - `transsc` (SocialCircle variation `Transformer-SC`);
-  - `transspc` (SocialCircle+ variation `Transformer-SCP`);
+  - `transscp` (SocialCircle+ variation `Transformer-SCP`);
 - MSN ([🔗homepage](https://northocean.github.io/MSN/)):
   - `msna` (original model);
   - `msnsc` (SocialCircle variation);
-  - `msnspc` (SocialCircle+ variation).
+  - `msnscp` (SocialCircle+ variation).
 - V^2-Net ([🔗homepage](https://cocoon2wong.github.io/Vertical/)):
   - `va` (original model);
   - `vsc` (SocialCircle variation);
-  - `vspc` (SocialCircle+ variation)
+  - `vscp` (SocialCircle+ variation)
 - E-V^2-Net ([🔗homepage](https://cocoon2wong.github.io/E-Vertical/)):
   - `eva` (original model);
   - `evsc` (SocialCircle variation);
-  - `evspc` (SocialCircle+ variation)
+  - `evscp` (SocialCircle+ variation)
 
 `DATASET_SPLIT` is the identifier (i.e., the name of dataset's split files in `dataset_configs`, for example `eth` is the identifier of the split list in `dataset_configs/ETH-UCY/eth.plist`) of the dataset or splits used for training.
 It accepts:
 
 - ETH-UCY: {`eth`, `hotel`, `univ`, `zara1`, `zara2`};
 - SDD: `sdd`;
-- NBA: `nba50k`;
-- nuScenes: {`nuScenes_v1.0`, `nuScenes_ov_v1.0`};
+- NBA: `nba50k`.
 
-For example, you can start training the `E-V^2-Net-SCP` model by
+For example, you can start training the `E-V^2-Net-SC+` model by
 
 ```bash
-python main.py --model evspc --split zara1
+python main.py --model evscp --split zara1
 ```
 
 You can also specify other needed args, like the learning rate `--lr`, batch size `--batch_size`, etc.
 See detailed args in the `Args Used` Section.
 
 In addition, the simplest way to reproduce our results is to copy all training args we used in the provided weights.
-For example, you can start a training of `E-V^2-Net-SCP` on `zara1` by:
+For example, you can start a training of `E-V^2-Net-SC+` on `zara1` by:
 
 ```bash
 python main.py --restore_args weights/SocialCirclePlus/evspczara1_adapative
 ```
 
-### Toy Example
+## Toy Example
 
 You can run the following script to learn how the proposed `SocialCirclePlus` works in an interactive way:
 
@@ -163,7 +161,7 @@ You can run the following script to learn how the proposed `SocialCirclePlus` wo
 python scripts/socialcircle_toy_example.py
 ```
 
-In the toy example, you can click `Switch Mode` to experience three interactive modes:
+In the toy example window, you can click `Switch Mode` to switch into three modes:
 
 - Interactive(SC)
   - Directly click on the scene picture or type in coordinates to set positions of the manual neighbor to see the model's outputs like:
