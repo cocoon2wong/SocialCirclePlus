@@ -2,7 +2,7 @@
 layout: page
 add-md-links: true
 title: Codes Guidelines
-subtitle: "Official implementation of the paper \"SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for
+subtitle: "Official implementation of the paper \"SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for
 Pedestrian Trajectory Prediction\""
 gh-repo: cocoon2wong/SocialCirclePlus
 gh-badge: [star, fork]
@@ -19,7 +19,7 @@ gh-badge: [star, fork]
 
 ## Get Started
 
-This is the official PyTorch codes for our paper "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction".
+This is the official PyTorch codes for our paper "SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for Pedestrian Trajectory Prediction".
 
 SocialCircle+ is an extended journal-version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle), and this paper will be made public soon. 
 For our pre-trained model weights, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus).

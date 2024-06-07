@@ -1,7 +1,7 @@
 ---
 layout: page
 title: SocialCircle+
-subtitle: "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction"
+subtitle: "SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for Pedestrian Trajectory Prediction"
 cover-img: /subassets/img/head_pic.jpg
 ---
 <!--
@@ -16,7 +16,7 @@ cover-img: /subassets/img/head_pic.jpg
 
 ## Information
 
-This is the homepage of our paper "SocialCircle+: Learning the Angle-based Conditioned Social Interaction Representation for Pedestrian Trajectory Prediction".
+This is the homepage of our paper "SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for Pedestrian Trajectory Prediction".
 
 SocialCircle+ is an extended journal-version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle), and this paper will be made public soon. 
 <!-- The paper is available on arXiv. -->
