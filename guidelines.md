@@ -10,8 +10,8 @@ gh-badge: [star, fork]
 <!--
  * @Author: Ziqian Zou
  * @Date: 2024-05-31 16:50:28
- * @LastEditors: Ziqian Zou
- * @LastEditTime: 2024-06-06 21:02:09
+ * @LastEditors: Conghao Wong
+ * @LastEditTime: 2024-09-29 10:09:14
  * @Description: file content
  * @Github: https://github.com/LivepoolQ
  * Copyright 2024 Ziqian Zou, All Rights Reserved.
@@ -21,7 +21,8 @@ gh-badge: [star, fork]
 
 This is the official PyTorch codes for our paper "SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for Pedestrian Trajectory Prediction".
 
-SocialCircle+ is an extended journal-version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle), and this paper will be made public soon. 
+SocialCircle+ is an extended journal-version of our previous work [SocialCircle](https://github.com/cocoon2wong/SocialCircle).
+It is available on [arXiv](https://arxiv.org/abs/2409.14984) now.
 For our pre-trained model weights, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus).
 
 You can clone [this repository](https://github.com/cocoon2wong/SocialCirclePlus) by the following command:
@@ -53,7 +54,7 @@ pip install -r requirements.txt
 
 ## Dataset Prepare and Process
 
-### ETH-UCY, SDD, NBA, nuScenes
+### ETH-UCY, SDD, NBA
 
 {: .box-warning}
 **Warning:** If you want to validate `SocialCirclePlus` models on these datasets, make sure you are getting this repository via `git clone` and that all `gitsubmodules` have been properly initialized via `git submodule update --init --recursive`.
@@ -72,11 +73,10 @@ You can run the following commands to prepare dataset files that have been valid
       python main_ethucysdd.py
       ```
 
-    - For `NBA` or `nuScenes`, you can download their original dataset files, put them into the given path listed within `dataset_original/main_nba.py` or `dataset_original/main_nuscenes.py`, then run
+    - For `NBA`, you can download their original dataset files, put them into the given path listed within `dataset_original/main_nba.py`, then run
 
       ```bash
       python main_nba.py
-      python main_nuscenes.py
       ```
 
 2. Back to the repo folder and create soft links:
@@ -89,10 +89,17 @@ You can run the following commands to prepare dataset files that have been valid
 
  (**NOTE**: You can also download the processed dataset files manually from [here](https://github.com/cocoon2wong/Project-Luna/releases), and put them into `dataset_processed` and `dataset_configs` folders.)
 
+**Dataset Corrections**:
+The `univ13` split (ETH-UCY) takes `univ` and `univ3` as test sets, and other sets {`eth`, `hotel`, `unive`, `zara1`, `zara2`, `zara3`} as training sets.
+Differently, the `univ` split only includes `univ` for testing models.
+Following most current approaches, our reported results for the `univ` subset are test under the split `univ13`.
+Correspondingly, some `SocialCircle` results have been corrected, and please check them in our [weights repo (SC+)](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCirclePlus) and [weights repo (SC)](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle) (postfixed with `univ13`).
+
 Click the following button to learn how we process these dataset files and the detailed dataset settings.
 
 <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
+    <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/notes/">💡 Datasets and Splits Information</a>
 </div>
 
 ### Prepare Your New Datasets
@@ -193,8 +200,7 @@ In the toy example window, you can click `Switch Mode` to switch into three mode
 - **Interactive(PC)**
   You can directly click on the canvas or type in coordinates to set a pair of corners' positions in pixels to add a manual obstacle box to see the model's outputs*.
 
-{: .box-warning}
-***Warning**: These modes may need dataset videos. For copyright reasons, we do not provide them in our repo.
+\* These modes may need dataset videos. For copyright reasons, we do not provide them in our repo.
 
 ## Args Used
 
