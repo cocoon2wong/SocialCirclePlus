@@ -1,6 +1,7 @@
 ---
 layout: page
-add-md-links: true
+table-of-contents: true
+breadcrumbs: true
 title: Codes Guidelines
 subtitle: "Official implementation of the paper \"SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for
 Pedestrian Trajectory Prediction\""
@@ -11,7 +12,7 @@ gh-badge: [star, fork]
  * @Author: Ziqian Zou
  * @Date: 2024-05-31 16:50:28
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-09-29 10:09:14
+ * @LastEditTime: 2025-03-25 12:49:15
  * @Description: file content
  * @Github: https://github.com/LivepoolQ
  * Copyright 2024 Ziqian Zou, All Rights Reserved.
